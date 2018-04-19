@@ -1,23 +1,20 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Posts</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+    </head>
+    <body>
+        @if($posts->count())
+            @foreach($posts as $post)
+                <h4>{{ $post->title }}</h4>
+                <p> {{ str_limit($post->body,10) }}</p>
+            @endforeach
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    You are logged in!
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+            {{ $posts->appends(Request::only('order', 'per-page'))->render() }}
+        @else
+            <p>No Posts</p>
+        @endif
+    </body>
+</html>
