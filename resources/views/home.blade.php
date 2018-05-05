@@ -6,15 +6,6 @@
 
     </head>
     <body>
-        @if($posts->count())
-            @foreach($posts as $post)
-                <h4>{{ $post->title }}</h4>
-                <p> {{ str_limit($post->body,10) }}</p>
-            @endforeach
-
-            {{ $posts->appends(Request::only('order', 'per-page'))->render() }}
-        @else
-            <p>No Posts</p>
-        @endif
+       <p>Create a Posts <a>here </p>
     </body>
 </html>
